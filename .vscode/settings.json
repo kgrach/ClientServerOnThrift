@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "thrift_server_transport.h": "c",
+    "system_error": "c"
+  }
+}
