@@ -1,4 +1,4 @@
-#include "../gen-c_glib/hello_svc.h"
+#include "gen-c_glib/hello_svc.h"
 
 #include <thrift/c_glib/transport/thrift_transport.h>
 #include <thrift/c_glib/transport/thrift_socket.h>
@@ -27,7 +27,7 @@ int main (void) {
 
   socket    = g_object_new (THRIFT_TYPE_SOCKET,
                             "hostname",  "localhost",
-                            "port",      9091,
+                            "port",      9090,
                             NULL);
   transport = g_object_new (THRIFT_TYPE_BUFFERED_TRANSPORT,
                             "transport", socket,

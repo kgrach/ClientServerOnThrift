@@ -1,8 +1,9 @@
 # Install Thrift
 ## Ubuntu
-  sudo apt install thrift-compiler libthrift-c-glib-dev
+  sudo apt install thrift-compiler libthrift-c-glib-dev libthrift-dev
 ## RedOS8
   sudo dnf install thrift*
 
 # Gen stubs for C
-  thrift --gen c_glib my.thrift
+  thrift --gen c_glib -o ./client my.thrift
+  thrift --gen cpp -o ./server my.thrift

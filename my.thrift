@@ -10,6 +10,7 @@ struct return_ec {
 service helloSvc {
    string getMessage(1: string name),
    return_ec EstablishContext(1: DWORD dwScope)
+   void Send(1:binary arg)
 }
 
 
