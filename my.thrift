@@ -1,12 +1,11 @@
-typedef i64     DWORD;
-typedef i64     SCARDCONTEXT;
+typedef i64     DWORD_RPC;
+typedef i64     SCARDCONTEXT_RPC;
 typedef i64     LONG_RPC;
 typedef binary  LPBYTE_RPC
 
 struct return_ec {
-  1: LONG_RPC       retValue
-  2: SCARDCONTEXT   cardContext
-  3: LPBYTE_RPC     buffer
+  1: LONG_RPC           retValue
+  2: SCARDCONTEXT_RPC   cardContext
 }
 
 struct return_lr {
@@ -15,10 +14,10 @@ struct return_lr {
 }
 
 service helloSvc {
-   string getMessage(1: string name),
-   return_ec EstablishContext(1: DWORD dwScope)
-   void Send(1:binary arg)
+  string getMessage(1: string name)
+  void Send(1:binary arg)
 
+  return_ec   EstablishContext(1: DWORD_RPC dwScope)
   return_lr   ListReaders(1: SCARDCONTEXT_RPC hContext, 2: DWORD_RPC pcchReaders)
 }
 
