@@ -57,15 +57,17 @@ int main (void) {
     if (success && hello_svc_if_establish_context(client, &ret, 123, &error)) {
 
       long retVal, context;
+      GByteArray *buf;
       g_object_get(ret,
                    "retValue", &retVal,
                    "cardContext", &context,
+                   "buffer", &buf,
                    NULL);
 
       printf("Server reply: retValue=%ld, cardContext=%ld\n", retVal, context);                   
-
-      g_object_unref(ret);
     }
+
+    g_object_unref(ret);
 
     if (!success) {
       

@@ -22,8 +22,11 @@ class helloSvcHandler : virtual public helloSvcIf {
 
   void EstablishContext(return_ec& _return, const DWORD dwScope) {
 
+    char buf[] = {0x01, 0x02, 0x03, 0x00, 0x00};
+
     _return.retValue = 111;
     _return.cardContext = 999;
+    _return.buffer = std::string(buf, 5);
   }
 
   void Send(const std::string& arg) {
