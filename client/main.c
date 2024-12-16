@@ -52,22 +52,37 @@ int main (void) {
       g_free (message);
     }
 
-    return_ec *ret = g_object_new(TYPE_RETURN_EC, NULL);
+    long retVal, context;
+    return_ec *ret_ec = g_object_new(TYPE_RETURN_EC, NULL);
     
-    if (success && hello_svc_if_establish_context(client, &ret, 123, &error)) {
+    if (success && hello_svc_if_establish_context(client, &ret_ec, 0x0002, &error)) {
 
-      long retVal, context;
-      GByteArray *buf;
-      g_object_get(ret,
+
+      g_object_get(ret_ec,
                    "retValue", &retVal,
                    "cardContext", &context,
-                   "buffer", &buf,
                    NULL);
 
       printf("Server reply: retValue=%ld, cardContext=%ld\n", retVal, context);                   
     }
 
-    g_object_unref(ret);
+    g_object_unref(ret_ec);
+
+    return_lr *ret_lr = g_object_new(TYPE_RETURN_LR, NULL);
+
+    if (success && hello_svc_if_list_readers(client, &ret_lr, context, -1, &error)) {
+
+      long retVal, context;
+      GByteArray *buf;
+      g_object_get(ret_lr,
+                   "retValue", &retVal,
+                   "mszReaders", &buf,
+                   NULL);
+
+      printf("Server reply: retValue=%ld\n", retVal);                   
+    }
+
+    g_object_unref(ret_lr);
 
     if (!success) {
       
